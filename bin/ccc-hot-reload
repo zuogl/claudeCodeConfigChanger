@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+const { spawn } = require('child_process');
+const path = require('path');
+
+// 获取参数
+let args = process.argv.slice(2);
+
+// 如果第一个参数是 'claude'，移除它（因为用户可能运行 ccc-hot-reload claude）
+if (args.length > 0 && args[0] === 'claude') {
+    args = args.slice(1);
+}
+
+// 如果没有参数且没有管道输入，显示使用说明
+if (args.length === 0 && process.stdin.isTTY) {
+    // 不显示帮助，直接启动交互式 claude
+}
+
+console.log('🚀 启动 Claude Code（支持配置热重载）...\n');
+
+// 使用代理脚本
+const proxyScript = path.join(__dirname, '..', 'lib', 'claude-proxy.js');
+
+// 启动代理
+const proxyProcess = spawn('node', [proxyScript, ...args], {
+    stdio: 'inherit'
+});
+
+proxyProcess.on('exit', (code) => {
+    process.exit(code);
+});
+
+// 处理中断信号
+process.on('SIGINT', () => {
+    proxyProcess.kill('SIGINT');
+});
+
+process.on('SIGTERM', () => {
+    proxyProcess.kill('SIGTERM');
+});

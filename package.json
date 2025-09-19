@@ -1,0 +1,43 @@
+{
+  "name": "claude-config-changer",
+  "version": "1.0.0",
+  "description": "A CLI tool to switch between different Claude API configurations",
+  "main": "index.js",
+  "bin": {
+    "ccc": "./bin/ccc.js",
+    "ccc-hot-reload": "./bin/ccc-hot-reload",
+    "claude-config-daemon": "./bin/claude-config-daemon.js"
+  },
+  "scripts": {
+    "start": "node bin/ccc.js",
+    "test": "node test.js",
+    "demo": "node demo/test-hot-reload.js",
+    "hot-reload": "node lib/claude-config-hot-reload.js",
+    "daemon": "node bin/claude-config-daemon.js"
+  },
+  "keywords": [
+    "claude",
+    "config",
+    "switch",
+    "api",
+    "anthropic",
+    "hot-reload",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.7",
+    "dotenv": "^16.3.1",
+    "joi": "^17.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/inquirer": "^8.2.10",
+    "typescript": "^5.3.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
