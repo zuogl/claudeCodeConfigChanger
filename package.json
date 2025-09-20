@@ -1,15 +1,24 @@
 {
   "name": "claude-config-changer",
   "version": "1.0.0",
-  "description": "A CLI tool to switch between different Claude API configurations",
+  "description": "A CLI tool to switch between different Claude API configurations with instant shell activation",
   "main": "index.js",
   "bin": {
-    "ccc": "./bin/ccc.js",
-    "clc": "./bin/clc.js"
+    "ccc": "bin/ccc.js",
+    "clc": "bin/clc.js"
   },
+  "files": [
+    "bin/",
+    "lib/",
+    "shell-wrapper.sh",
+    "install.sh",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "start": "node bin/ccc.js",
-    "test": "node -e \"console.log('No tests')\""
+    "test": "node -e \"console.log('No tests')\"",
+    "prepublishOnly": "echo 'About to publish to npm...'"
   },
   "keywords": [
     "claude",
@@ -18,10 +27,21 @@
     "api",
     "anthropic",
     "hot-reload",
-    "cli"
+    "cli",
+    "shell",
+    "environment",
+    "env"
   ],
-  "author": "",
+  "author": "zuotongxue <zuogl448@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuogl/claudeCodeConfigChanger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zuogl/claudeCodeConfigChanger/issues"
+  },
+  "homepage": "https://github.com/zuogl/claudeCodeConfigChanger#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "inquirer": "^8.2.7"
