@@ -9,9 +9,7 @@
   },
   "scripts": {
     "start": "node bin/ccc.js",
-    "test": "node test.js",
-    "demo": "node demo/test-hot-reload.js",
-    "hot-reload": "node lib/claude-config-hot-reload.js"
+    "test": "node -e \"console.log('No tests')\""
   },
   "keywords": [
     "claude",
@@ -26,15 +24,9 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
-    "inquirer": "^8.2.7",
-    "dotenv": "^16.3.1",
-    "joi": "^17.11.0"
+    "inquirer": "^8.2.7"
   },
-  "devDependencies": {
-    "@types/node": "^20.10.0",
-    "@types/inquirer": "^8.2.10",
-    "typescript": "^5.3.2"
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=14.0.0"
   }

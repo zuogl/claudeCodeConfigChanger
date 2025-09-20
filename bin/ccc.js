@@ -3,7 +3,6 @@
 const path = require('path');
 const ConfigParser = require('../lib/config-parser');
 const InteractiveMenu = require('../lib/interactive');
-const { notifyClaudeCodeProcesses } = require('../lib/config-watcher');
 
 const fs = require('fs');
 const os = require('os');

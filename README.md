@@ -63,7 +63,7 @@ source ~/.bashrc  # 或 source ~/.zshrc
 2. 启动 Claude Code（带热重载）或切换配置：
 
 ```bash
-# 启动 Claude Code，并在配置变化时热更新
+# 启动 Claude Code，并在配置变化时提示（下次生效）
 clc [claude args]
 
 # 打开交互式菜单切换配置

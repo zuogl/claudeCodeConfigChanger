@@ -5,14 +5,14 @@ const path = require('path');
 
 function printHelp() {
   console.log(`
-clc - Claude Code launcher with hot reload
+clc - Claude Code launcher
 
 Usage:
-  clc [claude args]        Start Claude Code (hot-reload config)
+  clc [claude args]        Start Claude Code
   clc --help               Show this help
 
 Examples:
-  clc                      # same as running 'claude' with hot reload
+  clc                      # same as running 'claude'
   clc --version            # pass args to underlying 'claude'
 `);
 }
