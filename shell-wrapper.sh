@@ -17,21 +17,21 @@ ccc() {
         if [ -n "$BASH_VERSION" ]; then
             # Bash
             if [ -f ~/.bashrc ]; then
-                source ~/.bashrc 2>/dev/null
+                source ~/.bashrc >/dev/null 2>&1
             elif [ -f ~/.bash_profile ]; then
-                source ~/.bash_profile 2>/dev/null
+                source ~/.bash_profile >/dev/null 2>&1
             fi
         elif [ -n "$ZSH_VERSION" ]; then
             # Zsh
             if [ -f ~/.zshrc ]; then
-                source ~/.zshrc 2>/dev/null
+                source ~/.zshrc >/dev/null 2>&1
             elif [ -f ~/.zprofile ]; then
-                source ~/.zprofile 2>/dev/null
+                source ~/.zprofile >/dev/null 2>&1
             fi
         else
             # Generic shell
             if [ -f ~/.profile ]; then
-                source ~/.profile 2>/dev/null
+                source ~/.profile >/dev/null 2>&1
             fi
         fi
 
@@ -44,5 +44,46 @@ ccc() {
     fi
 }
 
-# Export the function so it's available in subshells
-export -f ccc 2>/dev/null || true
+# Do not export the function; avoid zsh printing definitions on startup
+
+# Resolve install dir for this project (works in bash/zsh)
+_ccc_install_dir() {
+    # Prefer explicit env if set by installer
+    if [ -n "$CCC_HOME" ]; then
+        echo "$CCC_HOME"
+        return
+    fi
+
+    # Bash: BASH_SOURCE points to the sourced file
+    if [ -n "$BASH_VERSION" ] && [ -n "${BASH_SOURCE[0]}" ]; then
+        local src="${BASH_SOURCE[0]}"
+        cd "$(dirname "$src")" && pwd
+        return
+    fi
+
+    # Zsh: ${(%):-%N} expands to current script path
+    if [ -n "$ZSH_VERSION" ]; then
+        local src
+        src="$(eval 'printf %s "${(%):-%N}"')"
+        [ -n "$src" ] && { cd "$(dirname "$src")" && pwd; return; }
+    fi
+
+    # Fallback: current directory
+    pwd
+}
+
+# clc launcher: clc [claude args]
+clc() {
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo "Usage: clc [claude args]"
+        return 0
+    fi
+
+    local DIR
+    DIR="$(_ccc_install_dir)"
+
+    # Run our Node launcher explicitly (no conflict with system tools)
+    node "$DIR/bin/clc.js" "$@"
+}
+
+# Do not export clc to avoid leaking into subshell scripts unintentionally

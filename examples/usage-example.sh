@@ -7,7 +7,7 @@ echo "=========================================="
 echo
 
 echo "1. 在一个终端中启动支持热重载的 Claude Code："
-echo "   ccc-hot-reload"
+echo "   clc"
 echo
 
 echo "2. 在另一个终端中使用 ccc 切换配置："

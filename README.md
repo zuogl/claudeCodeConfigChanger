@@ -60,9 +60,13 @@ source ~/.bashrc  # 或 source ~/.zshrc
 # export ANTHROPIC_AUTH_TOKEN="sk-ant-api03-xxx"
 ```
 
-2. 运行命令：
+2. 启动 Claude Code（带热重载）或切换配置：
 
 ```bash
+# 启动 Claude Code，并在配置变化时热更新
+clc [claude args]
+
+# 打开交互式菜单切换配置
 ccc
 ```
 
@@ -73,6 +77,7 @@ ccc
 ```bash
 ccc --help              # 显示帮助信息
 ccc --config <path>     # 指定自定义配置文件路径
+clc --help              # 显示 clc 帮助
 ```
 
 ## 工作原理

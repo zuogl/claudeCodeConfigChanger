@@ -43,6 +43,8 @@ SHELL_CONFIG="$(detect_shell_config)"
 echo "🔧 Setting up shell wrapper..."
 
 WRAPPER_SOURCE="# Claude Config Changer - shell wrapper for environment refresh
+# Set install dir for wrapper to find its components
+export CCC_HOME=\"$SCRIPT_DIR\"
 if [ -f \"$SCRIPT_DIR/shell-wrapper.sh\" ]; then
     source \"$SCRIPT_DIR/shell-wrapper.sh\"
 fi"
@@ -61,7 +63,8 @@ echo "✨ Installation complete!"
 echo ""
 echo "📝 Next steps:"
 echo "   1. Restart your terminal or run: source $SHELL_CONFIG"
-echo "   2. Run 'ccc' to switch configurations"
+echo "   2. Run 'clc' to launch Claude Code (hot reload)"
+echo "   3. Run 'ccc' to switch configurations"
 echo ""
 echo "💡 The 'ccc' command will now refresh your current shell environment!"
-echo "   No need to open new terminal windows anymore."
+echo "   Use 'clc' to start Claude Code without clashing with system tools."

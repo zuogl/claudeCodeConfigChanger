@@ -14,56 +14,29 @@
 
 ## 解决方案
 
-提供了两种解决方案：
+提供了包装脚本方案：
 
-### 方案一：包装脚本（推荐）
+### 包装脚本（推荐）
 
 使用包装脚本启动 Claude Code，自动注入配置监控功能。
 
-### 方案二：守护进程模式
-
-运行一个独立的守护进程，持续监控配置文件并通知所有运行中的 Claude Code 进程。
-
 ## 使用方法
 
-### 方案一：使用包装脚本
+### 使用包装脚本
 
 ```bash
 # 使用包装脚本启动 Claude Code
-ccc-hot-reload [claude-code 参数]
+clc [claude-code 参数]
 
 # 例如：
-ccc-hot-reload
-ccc-hot-reload --help
+clc
+clc --help
 ```
 
 特点：
 - 自动注入配置监控
 - 简单易用
 - 适合单个 Claude Code 会话
-
-### 方案二：使用守护进程
-
-```bash
-# 1. 启动守护进程（在后台运行）
-claude-config-daemon start
-
-# 2. 正常启动 Claude Code
-claude-code
-
-# 3. 在另一个终端使用 ccc 切换配置
-ccc
-
-# 4. Claude Code 会自动收到配置更新通知
-
-# 停止守护进程
-claude-config-daemon stop
-```
-
-特点：
-- 一次启动，持续监控
-- 支持多个 Claude Code 进程
-- 无需修改启动方式
 
 ## 工作原理
 
@@ -73,37 +46,17 @@ claude-config-daemon stop
 3. 通过 IPC 接收配置变更通知
 4. 动态更新环境变量
 
-### 守护进程模式
-1. 守护进程监控配置文件变化
-2. 发现运行中的 Claude Code 进程
-3. 发送信号通知进程重新加载配置
-4. Claude Code 内置的处理器响应信号
-
 ## 示例工作流
 
 ### 包装脚本工作流
 ```bash
 # 终端 1：启动 Claude Code
-ccc-hot-reload
+clc
 
 # 终端 2：切换配置
 ccc
 
 # 选择新配置后，终端 1 自动更新
-```
-
-### 守护进程工作流
-```bash
-# 终端 1：启动守护进程
-claude-config-daemon start
-
-# 终端 2：启动 Claude Code
-claude-code
-
-# 终端 3：切换配置
-ccc
-
-# 终端 2 的 Claude Code 自动更新配置
 ```
 
 ## 高级用法
@@ -113,15 +66,7 @@ ccc
 ```bash
 # 包装脚本
 export CLAUDE_CONFIG_PATH=~/.zshrc
-ccc-hot-reload
-
-# 守护进程
-claude-config-daemon --config ~/.zshrc start
-```
-
-### 查看守护进程状态
-```bash
-claude-config-daemon status
+clc
 ```
 
 ## 限制
@@ -135,8 +80,7 @@ claude-config-daemon status
 
 - 配置监控服务：`lib/config-watcher.js`
 - 配置注入器：`lib/claude-injector.js`
-- 包装脚本：`bin/claude-hot-reload.js`
-- 守护进程：`bin/claude-config-daemon.js`
+- 启动命令：`bin/clc.js`
 
 ## 故障排除
 
@@ -158,6 +102,6 @@ claude-config-daemon status
 # 运行演示
 npm run demo
 
-# 测试守护进程
+# 测试热重载服务
 npm run hot-reload
 ```

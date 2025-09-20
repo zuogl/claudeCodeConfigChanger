@@ -105,7 +105,7 @@ export ANTHROPIC_AUTH_TOKEN="sk-ant-api03-direct-edit-jkl012"
 
     console.log('\n🎉 演示完成！');
     console.log('\n💡 实际使用方法:');
-    console.log('   1. 在一个终端运行: claude-hot-reload [args]');
+    console.log('   1. 在一个终端运行: clc [args]');
     console.log('   2. 在另一个终端使用 ccc 切换配置');
     console.log('   3. 观察第一个终端的配置自动更新\n');
 

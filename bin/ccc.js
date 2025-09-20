@@ -236,8 +236,13 @@ process.on('uncaughtException', (error) => {
     process.exit(1);
 });
 
-// Run the interactive menu
-menu.showSelectionMenu().catch(error => {
-    console.error('\n❌ Fatal error:', error.message);
-    process.exit(1);
-});
+// Run the interactive menu and set exit code based on whether config changed
+menu.showSelectionMenu()
+    .then(changed => {
+        // Exit 0 only when configuration actually changed; non-zero otherwise
+        process.exit(changed ? 0 : 2);
+    })
+    .catch(error => {
+        console.error('\n❌ Fatal error:', error.message);
+        process.exit(1);
+    });

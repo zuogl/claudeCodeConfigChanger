@@ -5,15 +5,13 @@
   "main": "index.js",
   "bin": {
     "ccc": "./bin/ccc.js",
-    "ccc-hot-reload": "./bin/ccc-hot-reload",
-    "claude-config-daemon": "./bin/claude-config-daemon.js"
+    "clc": "./bin/clc.js"
   },
   "scripts": {
     "start": "node bin/ccc.js",
     "test": "node test.js",
     "demo": "node demo/test-hot-reload.js",
-    "hot-reload": "node lib/claude-config-hot-reload.js",
-    "daemon": "node bin/claude-config-daemon.js"
+    "hot-reload": "node lib/claude-config-hot-reload.js"
   },
   "keywords": [
     "claude",
