@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 const path = require('path');
-const ConfigParser = require('../lib/config-parser');
-const InteractiveMenu = require('../lib/interactive');
-
 const fs = require('fs');
 const os = require('os');
 const { execSync } = require('child_process');
+const ConfigParser = require('../lib/config-parser');
+const InteractiveMenu = require('../lib/interactive');
 
 // Determine the shell config file
 function getConfigPath() {
