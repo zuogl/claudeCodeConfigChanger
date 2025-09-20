@@ -186,7 +186,7 @@ function getConfigPath() {
         }
 
     } catch (error) {
-        console.warn('Warning: Could not detect shell configuration:', error.message);
+        console.warn('警告: 无法检测 Shell 配置:', error.message);
     }
 
     // Ultimate fallback
@@ -197,17 +197,17 @@ function getConfigPath() {
 const args = process.argv.slice(2);
 if (args.includes('--help') || args.includes('-h')) {
     console.log(`
-Claude Config Changer (ccc)
+Claude 配置切换器 (ccc)
 
-Usage: ccc [options]
+用法: ccc [选项]
 
-Options:
-  -h, --help     Show this help message
-  --config <path>  Specify custom config file path
+选项:
+  -h, --help     显示此帮助信息
+  --config <path>  指定自定义配置文件路径
 
-Examples:
-  ccc              Show interactive menu
-  ccc --config ~/.custom-profile  Use custom config file
+示例:
+  ccc              显示交互式菜单
+  ccc --config ~/.custom-profile  使用自定义配置文件
 `);
     process.exit(0);
 }
@@ -225,12 +225,12 @@ const menu = new InteractiveMenu(configParser);
 
 // Handle unhandled rejections
 process.on('unhandledRejection', (reason, promise) => {
-    console.error('\n❌ Unhandled Rejection at:', promise, 'reason:', reason);
+    console.error('\n❌ 未处理的 Promise 拒绝:', promise, '原因:', reason);
     process.exit(1);
 });
 
 process.on('uncaughtException', (error) => {
-    console.error('\n❌ Uncaught Exception:', error);
+    console.error('\n❌ 未捕获的异常:', error);
     process.exit(1);
 });
 
@@ -241,6 +241,6 @@ menu.showSelectionMenu()
         process.exit(changed ? 0 : 2);
     })
     .catch(error => {
-        console.error('\n❌ Fatal error:', error.message);
+        console.error('\n❌ 致命错误:', error.message);
         process.exit(1);
     });
