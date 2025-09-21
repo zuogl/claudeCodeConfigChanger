@@ -1,6 +1,6 @@
 {
   "name": "claude-config-changer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A CLI tool to switch between different Claude API configurations with instant shell activation",
   "main": "index.js",
   "bin": {

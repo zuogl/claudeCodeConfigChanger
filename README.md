@@ -270,12 +270,12 @@ notepad $PROFILE
 # ===== Claude API 配置组 =====
 
 # 春秋中转站
-# $env:ANTHROPIC_BASE_URL="https://api.jiuwanliguoxue.com"
-# $env:ANTHROPIC_AUTH_TOKEN="sk-acw-bb6f8c05-4b598225ad4e96a2"
+# $env:ANTHROPIC_BASE_URL="https://xxxxoxue.com"
+# $env:ANTHROPIC_AUTH_TOKEN="sk-xxxxxxx"
 
 # 智谱GLM
-# $env:ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/anthropic"
-# $env:ANTHROPIC_AUTH_TOKEN="6f39db3efc854df094c75cb6b861dbbf.UXXSyHLennKVV1NM"
+# $env:ANTHROPIC_BASE_URL="https://open.bigmodel.cnxxxxxx"
+# $env:ANTHROPIC_AUTH_TOKEN="xxxxxxxxxx"
 ```
 
 **注意事项**：
