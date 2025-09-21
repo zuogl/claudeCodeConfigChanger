@@ -16,7 +16,9 @@
       "Bash(dir:*)",
       "Bash(where:*)",
       "Bash(bash:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []
