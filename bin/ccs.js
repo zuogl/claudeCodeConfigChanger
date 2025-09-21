@@ -5,15 +5,15 @@ const path = require('path');
 
 function printHelp() {
   console.log(`
-clc - Claude Code launcher
+ccs - Claude Code Starter
 
 Usage:
-  clc [claude args]        Start Claude Code
-  clc --help               Show this help
+  ccs [claude args]        Start Claude Code
+  ccs --help               Show this help
 
 Examples:
-  clc                      # same as running 'claude'
-  clc --version            # pass args to underlying 'claude'
+  ccs                      # same as running 'claude'
+  ccs --version            # pass args to underlying 'claude'
 `);
 }
 

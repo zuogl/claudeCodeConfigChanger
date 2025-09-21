@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell:*)",
+      "Bash(where claude)",
+      "Bash(echo $PROFILE)",
+      "Bash(powershell.exe:*)",
+      "Bash(dir)",
+      "Bash(tree:*)",
+      "Bash(node:*)",
+      "Bash(npm install)",
+      "Bash(cd:*)",
+      "Bash(where node)",
+      "Bash(echo $PATH)",
+      "Bash(echo $SHELL)",
+      "Bash(dir:*)",
+      "Bash(where:*)",
+      "Bash(bash:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

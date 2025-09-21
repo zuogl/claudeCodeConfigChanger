@@ -9,7 +9,7 @@ const InteractiveMenu = require('../lib/interactive');
 
 // Determine the shell config file
 function getConfigPath() {
-    const home = process.env.HOME || process.env.USERPROFILE || os.homedir();
+    const home = os.homedir();
     const platform = process.platform;
 
     try {

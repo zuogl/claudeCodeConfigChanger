@@ -5,15 +5,17 @@
   "main": "index.js",
   "bin": {
     "ccc": "bin/ccc.js",
-    "clc": "bin/clc.js"
+    "ccs": "bin/ccs.js"
   },
   "files": [
     "bin/",
     "lib/",
     "shell-wrapper.sh",
+    "shell-wrapper.ps1",
     "install.sh",
-    "README.md",
-    "LICENSE"
+    "install.ps1",
+    "install.bat",
+    "README.md"
   ],
   "scripts": {
     "start": "node bin/ccc.js",

@@ -72,10 +72,12 @@ _ccc_install_dir() {
     pwd
 }
 
-# clc launcher: clc [claude args]
-clc() {
+# ccs launcher: ccs [claude args] - Claude Code Starter
+ccs() {
     if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-        echo "Usage: clc [claude args]"
+        echo "Usage: ccs [claude args]"
+        echo "  ccs                - Start Claude with current config"
+        echo "  ccs --help         - Show Claude help"
         return 0
     fi
 
@@ -83,7 +85,7 @@ clc() {
     DIR="$(_ccc_install_dir)"
 
     # Run our Node launcher explicitly (no conflict with system tools)
-    node "$DIR/bin/clc.js" "$@"
+    node "$DIR/bin/ccs.js" "$@"
 }
 
-# Do not export clc to avoid leaking into subshell scripts unintentionally
+# Do not export ccs to avoid leaking into subshell scripts unintentionally
