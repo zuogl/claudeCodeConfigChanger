@@ -1,6 +1,6 @@
 {
   "name": "claude-config-changer",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "A CLI tool to switch between different Claude API configurations with instant shell activation",
   "main": "index.js",
   "bin": {
@@ -20,7 +20,8 @@
   "scripts": {
     "start": "node bin/ccc.js",
     "test": "node -e \"console.log('No tests')\"",
-    "prepublishOnly": "echo 'About to publish to npm...'"
+    "fix-line-endings": "perl -pi -e 's/\\r\\n/\\n/g; s/\\r/\\n/g' shell-wrapper.sh install.sh",
+    "prepublishOnly": "npm run fix-line-endings && echo 'Fixed line endings and ready to publish to npm...'"
   },
   "keywords": [
     "claude",
