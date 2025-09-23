@@ -54,6 +54,13 @@ _ccc_install_dir() {
         return
     fi
 
+    # Try to find global npm installation
+    local global_path="$(npm root -g 2>/dev/null)/claude-config-changer"
+    if [ -d "$global_path" ]; then
+        echo "$global_path"
+        return
+    fi
+
     # Bash: BASH_SOURCE points to the sourced file
     if [ -n "$BASH_VERSION" ] && [ -n "${BASH_SOURCE[0]}" ]; then
         local src="${BASH_SOURCE[0]}"

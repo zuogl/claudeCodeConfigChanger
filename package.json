@@ -1,17 +1,19 @@
 {
   "name": "claude-config-changer",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "A CLI tool to switch between different Claude API configurations with instant shell activation",
   "main": "index.js",
   "bin": {
     "ccc": "bin/ccc.js",
-    "ccs": "bin/ccs.js"
+    "ccs": "bin/ccs.js",
+    "ccc-setup": "bin/ccc-setup.js"
   },
   "files": [
     "bin/",
     "lib/",
     "shell-wrapper.sh",
     "shell-wrapper.ps1",
+    "postinstall.js",
     "install.sh",
     "install.ps1",
     "install.bat",
@@ -20,6 +22,7 @@
   "scripts": {
     "start": "node bin/ccc.js",
     "test": "node -e \"console.log('No tests')\"",
+    "postinstall": "node postinstall.js",
     "fix-line-endings": "perl -pi -e 's/\\r\\n/\\n/g; s/\\r/\\n/g' shell-wrapper.sh install.sh",
     "prepublishOnly": "npm run fix-line-endings && echo 'Fixed line endings and ready to publish to npm...'"
   },
@@ -49,7 +52,6 @@
     "chalk": "^4.1.2",
     "inquirer": "^8.2.7"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=14.0.0"
   }

@@ -2,6 +2,22 @@
 
 > 轻松管理多个 Claude API 配置，一键切换，无需重启！
 
+## 🚀 快速安装（3步搞定）
+
+```bash
+# 1. 全局安装
+npm install -g claude-config-changer
+
+# 2. 配置 Shell
+npx ccc-setup
+
+# 3. 重启终端或执行
+source ~/.zshrc  # Mac/Linux
+. $PROFILE       # Windows PowerShell
+```
+
+就这么简单！现在你可以使用 `ccc` 切换配置，`ccs` 启动 Claude Code 了。
+
 ## 📖 这是什么？
 
 Claude 配置切换器是一个简单易用的工具，专门为使用 Claude Code 的用户设计。如果你：
@@ -44,7 +60,9 @@ Claude 配置切换器是一个简单易用的工具，专门为使用 Claude Co
 2. **Claude CLI**
    - 确保已经安装并能正常使用 `claude` 命令
 
-### 第二步：全局安装 (推荐)
+### 第二步：安装配置切换器
+
+#### 方法一：全局安装（推荐）
 
 打开终端或命令提示符，运行以下命令：
 
@@ -52,133 +70,87 @@ Claude 配置切换器是一个简单易用的工具，专门为使用 Claude Co
 npm install -g claude-config-changer
 ```
 
+#### 方法二：使用 npx（无需全局安装）
 
-### 第三步：配置Shell环境
+如果不想全局安装，可以直接使用 npx：
 
-#### Windows PowerShell 用户（详细步骤）
+```bash
+npx claude-config-changer
+```
 
-##### 1. 打开 PowerShell（管理员模式）
+### 第三步：配置 Shell 环境
 
-   1. **打开搜索**：点击 Windows 开始菜单，或按 `Windows键`
-   2. **搜索 PowerShell**：在搜索框中输入 `powershell`
-   3. **以管理员身份运行**：
-      - 在搜索结果中找到 "Windows PowerShell"
-      - 右键点击它
-      - 选择 "以管理员身份运行"
-      - 如果弹出用户账户控制窗口，点击 "是"
+安装完成后，运行以下命令自动配置你的 Shell 环境：
 
-##### 2. 检查并创建 PowerShell 配置文件
+```bash
+npx ccc-setup
+```
 
-   在打开的 PowerShell 窗口中，我们需要先检查是否已经存在配置文件。
+这个命令会：
+- 🔍 自动检测你的操作系统（Windows/Mac/Linux）
+- 📝 找到正确的 Shell 配置文件（.bashrc/.zshrc/PowerShell Profile）
+- ⚙️ 添加必要的配置，让 `ccc` 和 `ccs` 命令可用
+- ✅ 提示你下一步操作
 
-   **第一步：检查配置文件是否存在**
+**支持的 Shell：**
+- ✅ Windows PowerShell
+- ✅ macOS/Linux Bash
+- ✅ macOS/Linux Zsh
+- ✅ Git Bash (Windows)
 
-   复制并粘贴以下命令，然后按回车：
+### 第四步：重新加载配置
+
+根据系统不同，执行相应的命令：
+
+**Windows PowerShell：**
+```powershell
+. $PROFILE
+```
+
+**macOS/Linux：**
+```bash
+source ~/.zshrc   # 如果使用 zsh
+source ~/.bashrc  # 如果使用 bash
+```
+
+或者直接重启终端窗口。
+
+### 手动配置（如果自动配置失败）
+
+#### Windows PowerShell 用户
+
+如果 `npx ccc-setup` 没有自动完成配置，可以手动添加：
+
+1. **打开 PowerShell 配置文件：**
    ```powershell
-   Test-Path $PROFILE
+   notepad $PROFILE
    ```
-
-   - 如果显示 `True`：说明配置文件已存在，跳到第3步
-   - 如果显示 `False`：说明配置文件不存在，继续下面的步骤
-
-   **第二步：创建配置文件（仅在上一步显示 False 时执行）**
-
-   复制并粘贴以下命令，然后按回车：
+   如果文件不存在，先创建它：
    ```powershell
    New-Item -Type File -Path $PROFILE -Force
    ```
 
-   你会看到类似这样的输出：
-   ```
-   目录: C:\Users\你的用户名\Documents\WindowsPowerShell
-
-   Mode                LastWriteTime         Length Name
-   ----                -------------         ------ ----
-   -a----              2024/1/1     12:00          0 Microsoft.PowerShell_profile.ps1
-   ```
-
-##### 3. 编辑配置文件
-
-   **打开配置文件进行编辑**
-
-   复制并粘贴以下命令，然后按回车：
-   ```powershell
-   notepad $PROFILE
-   ```
-
-   这会打开记事本。如果是新文件，记事本会是空白的。
-
-##### 4. 添加 Shell 包装器代码
-
-   **在记事本中添加以下内容**（直接复制粘贴整段代码）：
-
+2. **添加以下内容到配置文件：**
    ```powershell
    # Claude Config Changer - PowerShell wrapper
-   # 这段代码让 ccc 和 ccs 命令在 PowerShell 中可用
-
-   $global:ccc = {
-       param($args)
-       & npm root -g | ForEach-Object {
-           if (Test-Path "$_\claude-config-changer\bin\ccc.js") {
-               node "$_\claude-config-changer\bin\ccc.js" $args
-               # Reload profile to apply changes
-               . $PROFILE
-           }
-       }
-   }
-
-   $global:ccs = {
-       param($args)
-       & npm root -g | ForEach-Object {
-           if (Test-Path "$_\claude-config-changer\bin\ccs.js") {
-               node "$_\claude-config-changer\bin\ccs.js" $args
-           }
-       }
-   }
-
-   # Create aliases
-   Set-Alias -Name ccc -Value $global:ccc -Scope Global
-   Set-Alias -Name ccs -Value $global:ccs -Scope Global
+   $global:CCC_HOME = "$(npm root -g)\claude-config-changer"
+   . "$global:CCC_HOME\shell-wrapper.ps1"
    ```
 
-   **保存文件**：
-   - 按 `Ctrl + S` 保存
-   - 关闭记事本
-
-##### 5. 激活配置
-
-   **重新加载配置文件**
-
-   回到 PowerShell 窗口，复制并粘贴以下命令，然后按回车：
+3. **保存并重新加载配置：**
    ```powershell
    . $PROFILE
    ```
 
-   如果没有错误消息，说明配置成功！
-
-##### 6. 验证安装
-
-   **测试命令是否可用**
-
-   输入以下命令测试：
-   ```powershell
-   ccc --help
-   ```
-
-   如果看到帮助信息，恭喜你，配置成功！
-
-##### ⚠️ 常见问题解决
-
-   **如果遇到 "无法加载文件" 的错误：**
-
-   这是因为 PowerShell 的执行策略限制。运行以下命令解决：
+4. **如果遇到执行策略错误，运行：**
    ```powershell
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
    ```
-
-   输入 `Y` 确认，然后重新执行第5步。
+   输入 `Y` 确认。
 
 #### macOS/Linux 用户
+
+如果 `npx ccc-setup` 命令没有自动完成配置，你可以手动配置：
 
 1. **确定你的Shell类型**：
    ```bash
@@ -201,7 +173,8 @@ npm install -g claude-config-changer
 
    **对于 bash/zsh 用户**，在配置文件末尾添加：
    ```bash
-   # Claude Config Changer - shell wrapper
+   # Claude Config Changer - shell wrapper for environment refresh
+   # This enables hot-reload of environment variables and shell functions
    if [ -f "$(npm root -g)/claude-config-changer/shell-wrapper.sh" ]; then
        source "$(npm root -g)/claude-config-changer/shell-wrapper.sh"
    fi
@@ -664,6 +637,30 @@ copy backup_profile.ps1 $PROFILE
 # macOS/Linux
 cp ~/.bashrc.backup ~/.bashrc
 ```
+
+## 🎉 新版本特性 (v2.1.0)
+
+### ✨ 主要更新
+
+- **🚀 自动化安装流程**：新增 `npx ccc-setup` 命令，自动配置 Shell 环境
+- **🖥️ 完整的 Windows 支持**：改进了 PowerShell 集成，Windows 用户体验大幅提升
+- **🔍 智能路径检测**：自动查找全局 npm 安装路径，无需手动配置
+- **📝 简化的配置流程**：安装后立即提示配置步骤，新手友好
+- **🛡️ 更好的错误处理**：提供清晰的错误信息和解决方案
+
+### 📋 更新日志
+
+**v2.1.0** (2024-09-23)
+- 添加 `ccc-setup` 自动配置命令
+- 改进 Windows PowerShell 支持
+- 修复全局安装路径问题
+- 优化安装后提示信息
+- 更新文档，简化配置步骤
+
+**v2.0.2** (之前版本)
+- 修复 Windows 换行符问题
+- 改进跨平台兼容性
+- 优化配置文件权限处理
 
 ## 📦 开发者信息
 

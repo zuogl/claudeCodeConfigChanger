@@ -11,8 +11,17 @@ function ccc {
     $OLD_ANTHROPIC_BASE_URL = $env:ANTHROPIC_BASE_URL
     $OLD_ANTHROPIC_AUTH_TOKEN = $env:ANTHROPIC_AUTH_TOKEN
 
+    # Determine install path
+    $installPath = if ($global:CCC_HOME) {
+        $global:CCC_HOME
+    } else {
+        # Fallback to npm global path
+        $npmRoot = & npm root -g
+        Join-Path $npmRoot "claude-config-changer"
+    }
+
     # Run the actual ccc command
-    & node "$PSScriptRoot\bin\ccc.js" @Arguments
+    & node (Join-Path $installPath "bin\ccc.js") @Arguments
 
     # Check if the command was successful
     if ($LASTEXITCODE -eq 0) {
@@ -51,8 +60,17 @@ function ccs {
         return
     }
 
+    # Determine install path
+    $installPath = if ($global:CCC_HOME) {
+        $global:CCC_HOME
+    } else {
+        # Fallback to npm global path
+        $npmRoot = & npm root -g
+        Join-Path $npmRoot "claude-config-changer"
+    }
+
     # Run our Node launcher
-    & node "$PSScriptRoot\bin\ccs.js" @Arguments
+    & node (Join-Path $installPath "bin\ccs.js") @Arguments
 }
 
 # Functions are automatically available when this script is dot-sourced
